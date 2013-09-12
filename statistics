@@ -1,0 +1,33 @@
+数据统计分析平台
+需求
+1.	来自于运营部门的数据统计需求
+a)	粒度细分
+i.	媒介&应用（prg）：联合查询prg_header表；
+ii.	地域（area）：联合查询sys_area_city表；
+iii.	设备（model）：联合查询sys_mobiletype表；
+iv.	时段（hour）：联合查询sys_hour表；
+v.	网络标记（network）：0代表非wifi网络，1代表是wifi网络；
+vi.	越狱标记（jailbreak）：0代表非越狱or非root的机器，1代表已越狱or已root的机器。
+2.	表介绍
+a)	report_adv_prg：广告在媒介上的数据分布；
+b)	report_adv_model：广告在设备上的数据分布；
+c)	report_adv_area：广告在地域上的数据分布；
+d)	report_adv_hour：广告在时段上的数据分布：
+e)	report_adv_network：广告在网络上的数据分布；
+f)	report_adv_jailbreak：广告在越狱上的数据分布。
+3.	表结构介绍
+总体来讲，以上六个表数据结构完全一致，下图为report_adv_prg的例子。其他的表只是将prgid换为对应的字段，例如report_adv_area是将prgid替换为areaid。
+ 
+流程
+ 
+脚本位置与功能介绍
+1.	日志预处理和同步脚本
+a)	位置
+i.	iOS相关：192.168.1.232：/home/dev/hantest/ioscmd/
+ii.	Android相关：192.168.1.231：/home/dev/hantest/androidcmd/
+b)	功能
+i.	以上两个脚本会将原始日志中的” - ”符号替换为”,”，保证所有分隔符一直。
+ii.	通过scp功能将数据传输到192.168.1.225上的对应目录里面。
+操作实例
+目前全部采用接口调用形式进行统计操作
+异常处理
